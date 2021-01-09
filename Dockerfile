@@ -51,6 +51,7 @@ RUN yoctoDeps=' \
       cmake-curses-gui \
       cmake-gui \
       tftp-hpa  \
+      cpio \
     ' \
     otherDeps=' \
       libboost-all-dev \
@@ -63,9 +64,3 @@ RUN yoctoDeps=' \
       $otherDeps 
   
 RUN pip3 install lxml jinja2 treelib
-
-#create mount points and set owner
-
-RUN mkdir /root/projects
-RUN mkdir /root/downloads
-RUN mkdir /root/sstate-cache
