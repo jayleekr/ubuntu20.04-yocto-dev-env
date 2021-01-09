@@ -5,8 +5,6 @@
 # Jan 09, 2021 | First Release
 
 FROM ubuntu:20.04
-
-# For the convinience of Korean :D
 RUN sed -i 's/archive.ubuntu.com/ftp.daum.net/g' /etc/apt/sources.list 
 
 RUN yoctoDeps=' \
@@ -24,12 +22,11 @@ RUN yoctoDeps=' \
       unzip \
       wget \
       xterm \
-      repo \
       parted \
       dosfstools \
       mtools \
     ' \
-    mobilgeneDeps=' \
+    etcDepsForDev=' \
       sudo \
       apt-utils \
       xz-utils \
@@ -60,9 +57,9 @@ RUN yoctoDeps=' \
       iptables \
       debianutils \
     ' \
-    && apt-get update && apt-get install -y \
+    && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       $yoctoDeps \
-      $mobilgeneDeps \
+      $etcDepsForDev \
       $otherDeps 
   
 RUN pip3 install lxml jinja2 treelib
@@ -72,5 +69,3 @@ RUN pip3 install lxml jinja2 treelib
 RUN mkdir /root/projects
 RUN mkdir /root/downloads
 RUN mkdir /root/sstate-cache
-
-CMD [ "/bin/bash" ]
